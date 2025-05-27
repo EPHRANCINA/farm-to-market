@@ -1,0 +1,159 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Welcome to Farm to Market{% endblock %}
+
+{% block extra_css %}
+<style>
+    .welcome-section {
+        padding: 40px 0;
+        background-color: #ffffff;
+    }
+    .welcome-title {
+        font-size: 3.5rem;
+        color: #1e7e34;
+        margin-bottom: 20px;
+        font-weight: bold;
+        font-style: normal;
+    }
+    .welcome-subtitle {
+        font-size: 1.5rem;
+        color: #495057;
+        margin-bottom: 40px;
+    }
+
+    .banner {
+        position: relative;
+        text-align: center;
+        width: 100%;
+        overflow: hidden;
+        padding: 0;
+        background-color: transparent;
+    }
+    .banner-img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        display: block;
+    }
+    .banner-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2.5rem;
+        font-weight: bold;
+        background-color: rgba(0, 0, 0, 0.5);
+        padding: 0.8em 1.2em;
+        border-radius: 8px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .features-row {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-top: 40px;
+        padding: 0 20px;
+    }
+    .feature-card {
+        text-align: center;
+        padding: 30px 20px;
+        width: 250px;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: block;
+    }
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    .feature-card img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    .feature-card h3 {
+        font-size: 1.4rem;
+        color: #28a745;
+        margin-bottom: 10px;
+        margin-top: 0;
+    }
+    .feature-card p {
+        font-size: 1rem;
+        color: #555;
+    }
+
+    @media (max-width: 768px) {
+        .banner-img {
+            height: 300px;
+        }
+        .banner-text {
+            font-size: 2rem;
+        }
+        .feature-card {
+            width: 80%;
+            max-width: 300px;
+        }
+        .features-row {
+            gap: 20px;
+        }
+         .welcome-title {
+            font-size: 3rem;
+        }
+    }
+     @media (max-width: 576px) {
+        .banner-img {
+            height: 250px;
+        }
+        .banner-text {
+            font-size: 1.5rem;
+            padding: 0.5em 1em;
+        }
+         .feature-card {
+            width: 90%;
+         }
+         .welcome-title {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{# Image Banner Section #}
+<div class="banner">
+    <div class="banner-text">Fresh From the Farm to Your Table</div>
+</div>
+
+{# Welcome Text Section #}
+<div class="container welcome-section text-center">
+    <h2 class="welcome-title">Welcome to Farm to Market</h2>
+    <p class="welcome-subtitle">Connecting you directly with local farmers for the freshest produce.</p>
+</div>
+
+{# Feature Cards Section #}
+<div class="container features-row">
+    <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/100/vegetarian-food.png" alt="Local Produce Icon">
+        <h3>Local Produce</h3>
+        <p>Grown near you, delivered fresh.</p>
+    </div>
+    <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/100/farm.png" alt="Direct from Farmers Icon">
+        <h3>Direct from Farmers</h3>
+        <p>Support local farmers directly.</p>
+    </div>
+    <div class="feature-card">
+        <img src="https://img.icons8.com/ios-filled/100/green-earth.png" alt="Sustainable Choices Icon">
+        <h3>Sustainable Choices</h3>
+        <p>Eco-friendly and responsibly sourced.</p>
+    </div>
+</div>
+
+{% endblock %}

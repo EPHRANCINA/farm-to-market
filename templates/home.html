@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center text-center">
+        <div class="col-md-8">
+            <h1 class="display-4 mb-4">Welcome to Farm to Market</h1>
+            <p class="lead">Your one-stop platform for fresh, local produce directly from farmers to your doorstep.</p>
+            
+            {% if not user.is_authenticated %}
+                <div class="mt-4">
+                    <a href="{% url 'users:register' %}" class="btn btn-success btn-lg me-3">Get Started</a>
+                    <a href="{% url 'users:login' %}" class="btn btn-outline-success btn-lg">Login</a>
+                </div>
+            {% else %}
+                <div class="mt-4">
+                    <a href="{% url 'products:list' %}" class="btn btn-success btn-lg">Browse Products</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-shop display-4 text-success"></i>
+                    <h3 class="card-title mt-3">Fresh Products</h3>
+                    <p class="card-text">Access a wide variety of fresh, locally grown produce from trusted farmers.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-truck display-4 text-success"></i>
+                    <h3 class="card-title mt-3">Direct Delivery</h3>
+                    <p class="card-text">Get your products delivered directly from the farm to your doorstep.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100">
+                <div class="card-body text-center">
+                    <i class="bi bi-star display-4 text-success"></i>
+                    <h3 class="card-title mt-3">Quality Assured</h3>
+                    <p class="card-text">Every product is quality-checked and comes with satisfaction guarantee.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Order #{{ order.id }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Order #{{ order.id }}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h5>Order Information</h5>
+                            <p><strong>Date:</strong> {{ order.created_at|date }}</p>
+                            <p><strong>Status:</strong> 
+                                <span class="badge {% if order.status == 'pending' %}bg-warning{% elif order.status == 'completed' %}bg-success{% else %}bg-danger{% endif %}">
+                                    {{ order.get_status_display }}
+                                </span>
+                            </p>
+                            <p><strong>Total Amount:</strong> ${{ order.total_amount }}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Shipping Information</h5>
+                            <p><strong>Name:</strong> {{ order.user.get_full_name }}</p>
+                            <p><strong>Email:</strong> {{ order.user.email }}</p>
+                            <p><strong>Phone:</strong> {{ order.user.phone_number }}</p>
+                            <p><strong>Address:</strong> {{ order.user.address }}</p>
+                        </div>
+                    </div>
+
+                    <h5>Order Items</h5>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Subtotal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for item in order.items.all %}
+                                    <tr>
+                                        <td>
+                                            <a href="{% url 'products:detail' item.product.pk %}">
+                                                {{ item.product.name }}
+                                            </a>
+                                        </td>
+                                        <td>${{ item.price }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                        <td>${{ item.subtotal }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                                    <td><strong>${{ order.total_amount }}</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Order Actions</h5>
+                </div>
+                <div class="card-body">
+                    {% if order.status == 'pending' %}
+                        <form method="post" action="{% url 'orders:cancel' order.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger w-100 mb-2">Cancel Order</button>
+                        </form>
+                    {% endif %}
+                    <a href="{% url 'orders:list' %}" class="btn btn-secondary w-100">Back to Orders</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
