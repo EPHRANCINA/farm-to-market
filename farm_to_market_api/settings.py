@@ -14,6 +14,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'users.apps.UsersConfig',
     'products',
     'orders',
@@ -70,4 +71,17 @@ SECRET_KEY = 'django-insecure-r^%6z!g&l-p_@q9!z*e7n!m2v%h!h-z%u=t(j!l_r*b@c&k(y+
 
 LOGIN_URL = 'users:login'
 LOGIN_REDIRECT_URL = 'products:dashboard'
-LOGOUT_REDIRECT_URL = 'users:login' 
+LOGOUT_REDIRECT_URL = 'users:login'
+
+# Add REST Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+} 
